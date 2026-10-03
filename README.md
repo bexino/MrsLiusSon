@@ -6,7 +6,7 @@
 
 ## 快速开始
 
-Release
+https://github.com/bexino/mdKit/releases/
 
 ## 从源码构建
 
