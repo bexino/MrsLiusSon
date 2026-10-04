@@ -3,9 +3,11 @@
 // 伪装壳：Markdown 右键菜单工具（真实可用的无关功能），输入 67 才进入真正的破解流程。
 // 编码注意：输出一律走 console.log（TTY 下经 WriteConsoleW，任何代码页中文不乱码）；
 //          输入一律走 Node 内置 readline（ReadConsoleW），不要用 readline-sync。
+// 语言：启动时由 cli.js 询问 简体中文 / English，并写入 i18n 全局状态，本模块所有文案经 t() 取词。
 
 const { execFileSync } = require("child_process");
 const chalk = require("chalk");
+const { t } = require("./i18n");
 
 // HKCU 下的 ShellNew 键：控制「新建」菜单里 .md 的“新建 Markdown 文档”项
 const SHELL_NEW_KEY = "HKCU\\Software\\Classes\\.md\\ShellNew";
@@ -89,62 +91,65 @@ function removeShellNew() {
 }
 
 function statusLine() {
-    return hasShellNew() ? "已添加" : "未添加";
+    return hasShellNew() ? t("statusAdded") : t("statusNotAdded");
 }
 
-const MENU =
-    "\n" +
-    "  Markdown 右键菜单工具\n" +
-    "  =====================\n" +
-    "  1. 添加“新建 Markdown 文档”到右键菜单\n" +
-    "  2. 移除“新建 Markdown 文档”的右键菜单\n" +
-    "  3. 退出\n" +
-    "\n";
+function buildMenu() {
+    return (
+        "\n" +
+        t("menuTitle") + "\n" +
+        t("menuSep") + "\n" +
+        t("menu1") + "\n" +
+        t("menu2") + "\n" +
+        t("menu3") + "\n" +
+        "\n"
+    );
+}
 
 async function runDisguise(ask, waitAnyKey) {
     // eslint-disable-next-line no-constant-condition
     while (true) {
-        console.log(MENU);
-        console.log(chalk.gray("  当前状态: " + statusLine()));
-        const ans = await ask("输入对应数字后按下回车: ");
-        const t = String(ans == null ? "" : ans).trim();
+        console.log(buildMenu());
+        console.log(chalk.gray(t("statusPrefix") + statusLine()));
+        const ans = await ask(t("menuPrompt"));
+        const tAns = String(ans == null ? "" : ans).trim();
 
-        if (t === "1") {
+        if (tAns === "1") {
             try {
                 addShellNew();
-                console.log(chalk.green("\n  已添加“新建 Markdown 文档”到右键菜单。（若菜单未立即出现，重启资源管理器即可）"));
+                console.log(chalk.green(t("addedMsg")));
             } catch (e) {
-                console.log(chalk.red("\n  添加失败: " + (e.message || e)));
+                console.log(chalk.red(t("addFailed") + (e.message || e)));
             }
             console.log("");
-            console.log(chalk.cyan("按任意键退出..."));
+            console.log(chalk.cyan(t("pressAnyKey")));
             await waitAnyKey();
             return 0;
         }
 
-        if (t === "2") {
+        if (tAns === "2") {
             try {
                 removeShellNew();
-                console.log(chalk.green("\n  已移除“新建 Markdown 文档”的右键菜单。"));
+                console.log(chalk.green(t("removedMsg")));
             } catch (e) {
-                console.log(chalk.red("\n  移除失败: " + (e.message || e)));
+                console.log(chalk.red(t("removeFailed") + (e.message || e)));
             }
             console.log("");
-            console.log(chalk.cyan("按任意键退出..."));
+            console.log(chalk.cyan(t("pressAnyKey")));
             await waitAnyKey();
             return 0;
         }
 
-        if (t === "3") {
+        if (tAns === "3") {
             return 0;
         }
 
-        if (t === "67") {
+        if (tAns === "67") {
             // 暗门：进入真正的破解流程
             return "crack";
         }
 
-        console.log(chalk.red("  无效输入，请输入 1、2 或 3。\n"));
+        console.log(chalk.red(t("invalidMenuInput")));
     }
 }
 
