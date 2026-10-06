@@ -18,7 +18,7 @@ Adds Markdown to the Windows right-click New menu.
 
 ## Quick Start
 
-[Download the latest release.](https://github.com/bexino/mdKit/releases/)
+[Download the latest release.](https://github.com/bexino/MrsLiusSon/releases/)
 
 ## Build from Source
 
@@ -51,7 +51,7 @@ AGPL-3.0 license
 
 ## 快速开始
 
-[下载最新发布版本。](https://github.com/bexino/mdKit/releases/)
+[下载最新发布版本。](https://github.com/bexino/MrsLiusSon/releases/)
 
 ## 从源码构建
 
