@@ -8,6 +8,8 @@
 
 # Markdown Right-Click Tool
 
+A.K.A. `mdKit`.
+
 ```markdown
 `seis`, `siete`.
 ```
@@ -40,6 +42,8 @@ AGPL-3.0 license
 ---
 
 # 简体中文
+
+A.K.A. `mdKit`.
 
 ```markdown
 > 『誰可思誰聞？』
