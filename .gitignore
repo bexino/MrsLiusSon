@@ -1,0 +1,48 @@
+# ==========================================
+# Node.js 依赖与构建产物
+# ==========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+
+# dist/ 整体忽略（最终交付物 mdKit.exe 不进版本库）
+dist/
+
+# build/ 只忽略 esbuild 与 SEA 的中间产物，构建源码（build.js / sea-config.json / verify.js）要跟踪
+build/bundle.cjs
+build/sea-prep.blob
+
+# ==========================================
+# 运行时生成的日志、备份与临时文件
+# ==========================================
+Typora_Hook_Log.txt
+*.log
+*.bak
+*.asar
+*.asar.bak
+*.tmp
+
+# 激活码文件（程序会写到 Typora 安装目录，这里兜底防误建）
+AAA_*.txt
+
+# ==========================================
+# IDE & 编辑器配置与系统临时文件
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ==========================================
+# AI Agent 及系统生成的日志/缓存目录
+# ==========================================
+.gemini/
+.system_generated/
+.opencode/
