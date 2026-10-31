@@ -8,12 +8,6 @@
 
 # Markdown Right-Click Tool
 
-A.K.A. `mdKit`.
-
-```markdown
-`seis`, `siete`.
-```
-
 Adds Markdown to the Windows right-click New menu.
 
 ---
@@ -42,12 +36,6 @@ AGPL-3.0 license
 ---
 
 # 简体中文
-
-A.K.A. `mdKit`.
-
-```markdown
-> 『誰可思誰聞？』
-```
 
 为 Windows 右键新建添加 Markdown。
 
